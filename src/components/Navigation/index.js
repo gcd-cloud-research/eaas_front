@@ -1,23 +1,25 @@
 import React from "react";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
+import './styles.css';
+import {useAuth0} from "@auth0/auth0-react";
+import AuthenticationButton from "./authentication";
 
 const Navigation = () => {
+    const { loginWithRedirect } = useAuth0();
+
+    const { isAuthenticated } = useAuth0();
+    console.log(isAuthenticated);
     return (
         <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Container className="nav_container">
+                <Navbar.Brand href="#home">EAAS</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link className="btn" onClick={() => loginWithRedirect({screen_hint: "signup"})}>Sign Up</Nav.Link>
+                        <AuthenticationButton />
                     </Nav>
                 </Navbar.Collapse>
             </Container>
