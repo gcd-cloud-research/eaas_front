@@ -1,9 +1,10 @@
 import React from "react";
+import NewTaskForm from "../NewTaskForm";
 
 const Home = () => {
     return (
-        "yo"
+        <NewTaskForm/>
     )
-}
+};
 
 export default Home;
