@@ -7,16 +7,19 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
+import ModelTypeForm from "./ModelTypeForm";
+import FileForm from "./FileForm";
+import store from '../../store';
 
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = ['Select the model type', 'Select the type of uncertainty', 'Select the solver', 'Upload the file', 'Upload the configuration file'];
 
 export default function NewTaskForm() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
     const isStepOptional = (step) => {
-        return step === 1;
+        return step === 4;
     };
 
     const isStepSkipped = (step) => {
@@ -24,6 +27,7 @@ export default function NewTaskForm() {
     };
 
     const handleNext = () => {
+        console.log(store.getState());
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -57,6 +61,15 @@ export default function NewTaskForm() {
         setActiveStep(0);
     };
 
+    function _renderStepContent(step) {
+        switch (step) {
+            case 0:
+                return <ModelTypeForm/>;
+            case 1:
+                return <FileForm/>;
+        }
+    }
+
     return (
         <div className="App-CenteredContainer">
         <Card sx={{ width: '80%' }} className="App-Card" >
@@ -82,9 +95,6 @@ export default function NewTaskForm() {
             </Stepper>
             {activeStep === steps.length ? (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
-                    </Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
                         <Button onClick={handleReset}>Reset</Button>
@@ -92,7 +102,7 @@ export default function NewTaskForm() {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+                    {_renderStepContent(activeStep)}
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Button
                             color="inherit"

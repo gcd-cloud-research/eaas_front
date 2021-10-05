@@ -19,5 +19,7 @@ const getMiddleware = () => {
     }
 };
 
-export const store = createStore(
+const store = createStore(
     createRootReducer(history), composeWithDevTools(getMiddleware()));
+
+export default store;
