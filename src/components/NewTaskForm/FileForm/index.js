@@ -13,15 +13,24 @@ import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
+import store from "../../../store";
+import {MODEL_FILE_ADDED, MODEL_FILE_REMOVED} from "../../../constants/actionTypes";
 
 const FileForm = () => {
-    const [files, setFile] = useState([]);
+    const [files, setFile] = useState(store.getState().modelfiles);
     const MAX_ALLOWED_FILE = 10;
 
     async function uploadSingleFile(e) {
         const reader = new FileReader();
         reader.onload = async (x) => {
             const text = (x.target.result);
+            store.dispatch({
+               type: MODEL_FILE_ADDED,
+               payload: {
+                   name: x.target.fileName,
+                   contents: text
+               }
+            });
             setFile([
                 ...files,
                 {
@@ -36,6 +45,12 @@ const FileForm = () => {
     }
 
     function deleteFile(e) {
+        store.dispatch({
+            type: MODEL_FILE_REMOVED,
+            payload: {
+                index: e
+            }
+        });
         const s = files.filter((item, index) => index !== e);
         setFile(s);
     }
