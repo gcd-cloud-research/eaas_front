@@ -5,7 +5,7 @@ This repository is the Frontend of the EAAS project. It's made using React-Redux
 Maintainers: 
 - Lluís Mas lluis.mas@udl.cat
 - Jordi Mateo jordi.mateo@udl.cat
- 
+    
 
 ## Available Scripts
 

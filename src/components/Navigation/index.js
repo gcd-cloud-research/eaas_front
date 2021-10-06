@@ -25,6 +25,6 @@ const Navigation = () => {
             </Container>
         </Navbar>
     )
-}
+};
 
 export default Navigation;
