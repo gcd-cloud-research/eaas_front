@@ -1,3 +1,4 @@
+/*
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
@@ -28,3 +29,4 @@ const requests = {
 export default {
     setToken: _token => { token = _token; }
 };
+*/

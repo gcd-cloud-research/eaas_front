@@ -67,6 +67,8 @@ export default function NewTaskForm() {
                 return <ModelTypeForm/>;
             case 1:
                 return <FileForm/>;
+            default:
+                return "Not Found";
         }
     }
 
