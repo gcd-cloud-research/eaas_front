@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import FileForm from "./FileForm";
 import store from '../../store';
+import ProblemCharacteristics from "../ProblemCharacteristics";
 
 
 const steps = ['Upload files', 'Select the solver', 'Upload the file', 'Upload the configuration file'];
@@ -64,6 +65,8 @@ export default function NewTaskForm() {
         switch (step) {
             case 0:
                 return <FileForm/>;
+            case 1:
+                return <ProblemCharacteristics/>;
             default:
                 return "Not Found";
         }
