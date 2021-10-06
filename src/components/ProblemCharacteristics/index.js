@@ -11,6 +11,11 @@ import Grid from "@mui/material/Grid";
 
 const ProblemCharacteristics = () => {
     const [files] = useState(store.getState().modelfiles);
+    const model = {
+        type: undefined,
+        uncertainty: undefined,
+        solver: undefined
+    };
 
     function getFileExtension(item) {
         return `File: ${item.name}  -   Extension: ${item.name.split('.').at(-1)}`;
@@ -21,19 +26,17 @@ const ProblemCharacteristics = () => {
         return files.map(item => getFileExtension(item));
     }
 
-    function getModelType() {
-        const model = {
-            type: undefined,
-            uncertainty: undefined,
-            solver: undefined
-        };
 
-        const ext = getFileExtension(files[0]);
+    function getModelType() {
+
+        const ext = files[0].name.split('.').at(-1);
 
         if (files.length === 1) {
-            if (ext === 'mps' || ext === 'ls') {
+            if (ext === "mps" || ext === 'ls') {
                 model.type = "linear";
                 model.uncertainty = "deterministic";
+
+                console.log(model);
             }
 
         }
@@ -42,8 +45,14 @@ const ProblemCharacteristics = () => {
         {
             model.type = "non-linear";
         }
-        return model;
+
+        console.log(files);
+        console.log(files.length);
+        console.log(ext);
+        console.log(files.length === 1);
     }
+
+    getModelType();
 
     return (
         <React.Fragment>
@@ -66,8 +75,12 @@ const ProblemCharacteristics = () => {
                 </List>
             </Grid>
 
-            <Typography>
-                Detected model: {getModelType()}
+            <Typography component={'span'}>
+                Detected model:
+                <Typography> Type: {model.type} </Typography>
+                <Typography> Uncertainty: {model.uncertainty} </Typography>
+                <Typography> Solver: {model.solver} </Typography>
+
             </Typography>
         </React.Fragment>
     )
