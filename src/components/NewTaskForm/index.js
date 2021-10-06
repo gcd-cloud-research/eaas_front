@@ -7,12 +7,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
-import ModelTypeForm from "./ModelTypeForm";
 import FileForm from "./FileForm";
 import store from '../../store';
 
 
-const steps = ['Select the model type', 'Select the type of uncertainty', 'Select the solver', 'Upload the file', 'Upload the configuration file'];
+const steps = ['Upload files', 'Select the solver', 'Upload the file', 'Upload the configuration file'];
 
 export default function NewTaskForm() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -64,8 +63,6 @@ export default function NewTaskForm() {
     function _renderStepContent(step) {
         switch (step) {
             case 0:
-                return <ModelTypeForm/>;
-            case 1:
                 return <FileForm/>;
             default:
                 return "Not Found";
